@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: 245, 245, 245;
+  --surface-foreground: 17, 17, 17;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: 24, 24, 24;
+    --surface-foreground: 230, 230, 230;
+  }
+}
+
+body {
+  @apply font-body;
+}
