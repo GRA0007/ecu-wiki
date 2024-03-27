@@ -5,6 +5,8 @@
 :root {
   --surface: 245, 245, 245;
   --surface-foreground: 17, 17, 17;
+
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,5 +17,5 @@
 }
 
 body {
-  @apply font-body;
+  @apply font-body lining-nums;
 }

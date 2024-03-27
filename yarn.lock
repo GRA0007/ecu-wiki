@@ -623,6 +623,7 @@ __metadata:
     "@types/node": "npm:^20.11.30"
     "@types/react": "npm:^18.2.72"
     "@types/react-dom": "npm:^18.2.22"
+    lucide-react: "npm:^0.363.0"
     next: "npm:14.2.0-canary.44"
     postcss: "npm:^8.4.38"
     react: "npm:^18.2.0"
@@ -1020,6 +1021,15 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10/fc1fe2ee205f7c8855fa0f34c1ab0bcf14b6229e35579ec1fd1079f31d6fc8ef8eb6fd17f2f4d99788d7e339f50e047555551ebd5e434dda503696e7c6591825
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.363.0":
+  version: 0.363.0
+  resolution: "lucide-react@npm:0.363.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 10/a007e37428c7f99d5c7431703bd6970ce50c62c4592b0a91badd746bdab8ac578f87a67b9d6193d0d36bf1451c432de91795cbdc535dbcb4943510a1752d1cba
   languageName: node
   linkType: hard
 

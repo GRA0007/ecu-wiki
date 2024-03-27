@@ -15,6 +15,9 @@ const config: Config = {
           foreground: 'rgb(var(--surface-foreground))',
         },
       },
+      backgroundImage: {
+        noise: "url('/noise.png')",
+      },
     },
   },
   plugins: [],
