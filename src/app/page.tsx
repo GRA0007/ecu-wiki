@@ -1,5 +1,4 @@
 import { Search } from '@/components/Search'
-import { CircleDashedIcon } from 'lucide-react'
 import Link from 'next/link'
 
 const Home = () => {
@@ -14,29 +13,23 @@ const Home = () => {
         <div className="bg-[radial-gradient(72.09%_72.69%_at_36.53%_13.59%,_#0C6BDB_0%,_#002D62_100%)] h-[300px] w-[300px] rounded-full shadow-2xl" />
 
         <Link
-          href="/solar-and-sundry"
-          className="flex items-center gap-4 absolute top-[20%] left-[58%] hover:underline font-heading font-bold text-2xl focus:outline-none focus-visible:ring-2 rounded"
+          href="/comics/solar-and-sundry"
+          className="flex items-center gap-4 absolute top-[20%] left-[58%] hover:underline font-heading font-bold text-2xl"
         >
-          <img
-            src="https://imagedelivery.net/zthi1l8fKrUGB5ig08mq-Q/6b7613e1-2834-4db0-ca26-f03b2e36df00/public"
-            alt=""
-            className="w-8 h-8 rounded-full object-cover"
-          />
           <span>Solar and Sundry</span>
         </Link>
 
         <Link
-          href="/untitled"
-          className="flex items-center gap-4 absolute bottom-[20%] left-[58%] hover:underline font-heading font-bold text-2xl focus:outline-none focus-visible:ring-2 rounded"
+          href="/ewan-breakey"
+          className="flex items-center gap-4 absolute bottom-[20%] left-[58%] hover:underline font-heading font-bold text-2xl"
         >
-          <CircleDashedIcon className="h-8 w-8 text-white/60" />
-          <span>Untitled</span>
+          <span>Ewan Breakey</span>
         </Link>
       </main>
 
       <Search />
 
-      <footer className="text-white/60 font-heading">&copy; 2024 The Ewan Breakey Fan Club</footer>
+      <footer className="text-white/60 font-heading text-center">&copy; 2024 The Ewan Breakey Fan Club</footer>
     </div>
   )
 }
