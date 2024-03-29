@@ -6,6 +6,8 @@
   --surface: 245 245 245;
   --surface-foreground: 17 17 17;
 
+  --border: 196 196 196;
+
   color-scheme: light dark;
 }
 
@@ -13,13 +15,21 @@
   :root {
     --surface: 24 24 24;
     --surface-foreground: 230 230 230;
+
+    --border: 60 60 60;
   }
 }
 
-body {
-  @apply font-body lining-nums;
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-a {
-  @apply focus:outline-none focus-visible:ring rounded-sm;
+  body {
+    @apply font-body lining-nums;
+  }
+
+  a {
+    @apply focus:outline-none focus-visible:ring rounded-sm;
+  }
 }

@@ -15,11 +15,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Search />
       </div>
 
-      <nav className="px-6 py-4 bg-surface text-surface-foreground rounded w-[1000px] max-w-full shadow-lg">
-        <Link href="/comics">Comics</Link>
+      <nav className="px-6 py-4 bg-surface text-surface-foreground rounded w-[1000px] max-w-full shadow-lg dark:border">
+        <Link href="/comics" className="font-heading hover:underline font-bold text-xl">
+          Comics
+        </Link>
       </nav>
 
-      <main className="p-6 pt-4 bg-surface text-surface-foreground rounded w-[1000px] max-w-full shadow-lg">
+      <main className="p-6 pt-4 bg-surface text-surface-foreground rounded w-[1000px] max-w-full shadow-lg dark:border">
         {children}
       </main>
 

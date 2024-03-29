@@ -9,7 +9,7 @@ export const StubNotice = ({ editUrl }: { editUrl: string }) => {
         <span className="font-heading text-xl font-bold mb-1">This page is a stub</span>
         <p className="text-sm">
           You can help improve it by{' '}
-          <Link href={editUrl} rel="noreferrer nofollow" className="underline">
+          <Link href={editUrl} rel="noreferrer nofollow" target="_blank" className="underline">
             editing this page
           </Link>
           .

@@ -14,6 +14,7 @@ const config: Config = {
           DEFAULT: 'rgb(var(--surface))',
           foreground: 'rgb(var(--surface-foreground))',
         },
+        border: 'rgb(var(--border))',
       },
       backgroundImage: {
         noise: "url('/noise.png')",
