@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: "Explore the facts and behind the scenes of Ewan's Comic Universe",
   keywords: ['ewan breakey', 'comic', 'solar and sundry', 'webcomic'],
   robots: 'index, follow',
+  icons: '/logo.svg',
   metadataBase: BASE_URL,
 }
 

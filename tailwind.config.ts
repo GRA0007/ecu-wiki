@@ -10,6 +10,8 @@ const config: Config = {
     },
     extend: {
       colors: {
+        background: 'rgb(var(--background))',
+        primary: 'rgb(var(--primary))',
         surface: {
           DEFAULT: 'rgb(var(--surface))',
           foreground: 'rgb(var(--surface-foreground))',

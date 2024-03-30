@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --background: 0 48 42;
+  --primary: 0 93 87;
   --surface: 245 245 245;
   --surface-foreground: 17 17 17;
 
@@ -13,6 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --primary: 0 214 201;
     --surface: 24 24 24;
     --surface-foreground: 230 230 230;
 
@@ -20,9 +23,9 @@
   }
 }
 
-@layer base {
+@layer components {
   * {
-    @apply border-border;
+    @apply border-border ring-primary/50;
   }
 
   body {

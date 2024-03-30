@@ -45,7 +45,7 @@ const WikiPage = async ({ params }: Props) => {
         <h1 className="font-heading text-3xl font-bold">{page.title}</h1>
 
         <div className="flex items-baseline gap-x-4 flex-wrap sm:flex-col sm:items-end sm:text-right">
-          <Link href={editUrl} rel="noreferrer nofollow" target="_blank" className="underline text-sm">
+          <Link href={editUrl} rel="noreferrer nofollow" target="_blank" className="underline text-sm text-primary">
             Edit page
           </Link>
           <span className="text-xs text-surface-foreground/50">

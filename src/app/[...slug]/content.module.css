@@ -1,6 +1,10 @@
 .content {
   @apply space-y-4;
 
+  & a {
+    @apply text-primary;
+  }
+
   & h2 {
     @apply font-heading font-bold text-2xl border-b overflow-scroll leading-normal;
   }

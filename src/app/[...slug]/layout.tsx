@@ -3,13 +3,16 @@ import Link from 'next/link'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-dvh bg-indigo-950 flex flex-col items-center text-white bg-noise gap-5 md:gap-10 p-5 md:p-10">
+    <div className="min-h-dvh bg-background flex flex-col items-center text-white bg-noise gap-5 md:gap-10 p-5 md:p-10">
       <div className="w-[1000px] max-w-full flex flex-wrap items-center justify-between gap-5">
-        <div className="flex flex-col">
-          <Link href="/" className="font-display text-3xl hover:underline">
-            Ewan's Comic Universe Wiki
-          </Link>
-          <span className="font-heading text-lg">A Fan Project</span>
+        <div className="flex items-center gap-5">
+          <img src="/logo.svg" alt="" className="h-12 w-12" />
+          <div className="flex flex-col">
+            <Link href="/" className="font-display text-3xl hover:underline underline-offset-4 decoration-2">
+              Ewan's Comic Universe Wiki
+            </Link>
+            <span className="font-heading text-lg">A Fan Project</span>
+          </div>
         </div>
 
         <Search />
