@@ -2,10 +2,19 @@
   @apply space-y-4;
 
   & h2 {
-    @apply font-heading font-bold text-2xl border-b overflow-auto;
+    @apply font-heading font-bold text-2xl border-b overflow-scroll leading-normal;
   }
   & h3 {
     @apply font-heading font-bold text-xl;
+  }
+
+  & h2, & h3, & h4, & h5, & h6 {
+    & [data-heading-link=true] {
+      @apply ml-2 hidden items-center;
+    }
+    &:hover [data-heading-link=true] {
+      @apply inline-flex;
+    }
   }
 
   & figure {

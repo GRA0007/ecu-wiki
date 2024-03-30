@@ -2,12 +2,14 @@ import { readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { StubNotice } from '@/components/StubNotice'
 import { getEditUrl } from '@/utils/getEditUrl'
-import { ExternalLinkIcon } from 'lucide-react'
+import { ExternalLinkIcon, LinkIcon } from 'lucide-react'
 import type { Html, Paragraph, PhrasingContent } from 'mdast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
 import { cache } from 'react'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
 
@@ -30,6 +32,17 @@ export const loadPage = cache(async (slug: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         remarkPlugins: [remarkGfm, remarkSmartypants],
+        rehypePlugins: [
+          rehypeSlug,
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: 'append',
+              content: { type: 'text', value: '' },
+              properties: { 'data-heading-link': true, ariaHidden: true, tabIndex: -1 },
+            },
+          ],
+        ],
         remarkRehypeOptions: {
           clobberPrefix: '',
           footnoteLabel: 'References',
@@ -43,7 +56,8 @@ export const loadPage = cache(async (slug: string) => {
         if (!props.href) throw new Error('Link href is missing')
         const isExternal = props.href.includes('://') && !props.href?.includes('.mdx')
 
-        const isFootnoteNumber = Boolean('data-footnote-ref' in props && props['data-footnote-ref'])
+        const isFootnoteNumber = 'data-footnote-ref' in props
+        const isHeadingLink = 'data-heading-link' in props
 
         return (
           <Link
@@ -53,6 +67,7 @@ export const loadPage = cache(async (slug: string) => {
             target={isExternal ? '_blank' : undefined}
             className={isFootnoteNumber ? 'hover:underline' : 'underline'}
           >
+            {isHeadingLink && <LinkIcon className="h-4 w-4 inline-block" />}
             {isFootnoteNumber ? <>[{children}]</> : children}
             {isExternal && <ExternalLinkIcon className="h-3 w-3 inline-block ml-1 align-middle" />}
           </Link>
