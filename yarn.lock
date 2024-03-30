@@ -421,6 +421,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/nlcst@npm:^1.0.0":
+  version: 1.0.4
+  resolution: "@types/nlcst@npm:1.0.4"
+  dependencies:
+    "@types/unist": "npm:^2"
+  checksum: 10/7bd08bdf29fc01e335586da6f63a861b721bad0f2d1fcb76ac1f573f6890f5411cf1fbe15fc0d589ffdda17ab94abac60eea1343af92f017298d22048435d24c
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^20.11.30":
   version: 20.11.30
   resolution: "@types/node@npm:20.11.30"
@@ -582,6 +591,13 @@ __metadata:
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
   checksum: 10/18640244e641a417ec75a9bd38b0b2b6b95af5199aa241b131d4b2fb206f334d7ecc600bd194861610a5579084978bfcbb02baa399dbe442d56d0ae5e60dbaef
+  languageName: node
+  linkType: hard
+
+"array-iterate@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "array-iterate@npm:2.0.1"
+  checksum: 10/b3db2c865a245dfded8f8dfe280218d2170e2ae8d4f559f6a1f66bdca6523bd406fe2cc99c323c545503f2652ec5ed7b1bbdf3d12eb130bfe980fdde36c33db7
   languageName: node
   linkType: hard
 
@@ -882,12 +898,14 @@ __metadata:
     "@types/react": "npm:^18.2.73"
     "@types/react-dom": "npm:^18.2.23"
     lucide-react: "npm:^0.363.0"
+    mdast-util-from-markdown: "npm:^2.0.0"
     next: "npm:14.2.0-canary.48"
     next-mdx-remote: "npm:^4.4.1"
     postcss: "npm:^8.4.38"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     remark-gfm: "npm:^4.0.0"
+    remark-smartypants: "npm:^2.1.0"
     tailwindcss: "npm:^3.4.3"
     typescript: "npm:^5.4.3"
   languageName: unknown
@@ -2704,6 +2722,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nlcst-to-string@npm:^3.0.0":
+  version: 3.1.1
+  resolution: "nlcst-to-string@npm:3.1.1"
+  dependencies:
+    "@types/nlcst": "npm:^1.0.0"
+  checksum: 10/c4598918b70ba5bbf96137592dd97149d280458ce68e579e6946729bce909d1d812ee96c2a877c702bd6ae24d47f93b4acfccdeb50fb214ec315cd3979d57cba
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 10.1.0
   resolution: "node-gyp@npm:10.1.0"
@@ -2778,6 +2805,17 @@ __metadata:
     is-decimal: "npm:^2.0.0"
     is-hexadecimal: "npm:^2.0.0"
   checksum: 10/71314312d2482422fcf0b6675e020643bab424b11f64c654b7843652cae03842a7802eda1fed194ec435debb5db47a33513eb6b1176888e9e998a0368f01f5c8
+  languageName: node
+  linkType: hard
+
+"parse-latin@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "parse-latin@npm:5.0.1"
+  dependencies:
+    nlcst-to-string: "npm:^3.0.0"
+    unist-util-modify-children: "npm:^3.0.0"
+    unist-util-visit-children: "npm:^2.0.0"
+  checksum: 10/fee3fe0aea60ed735f62e4d5ddfa1f97b776c5200b9fab2cc04afa7aa38fd165356b9fbe369efc1c74103eca0838f28a910afb36aaace60f3e71d15559acc616
   languageName: node
   linkType: hard
 
@@ -3065,6 +3103,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remark-smartypants@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "remark-smartypants@npm:2.1.0"
+  dependencies:
+    retext: "npm:^8.1.0"
+    retext-smartypants: "npm:^5.2.0"
+    unist-util-visit: "npm:^5.0.0"
+  checksum: 10/c4c48512a6676312adc54e2fa772b6855b16774a96fa4af120541bba7360a2d7d4e0049cdc767aac9ede967855a2888ed5f3f9910fa1f9d778b877e422bdbc3e
+  languageName: node
+  linkType: hard
+
 "remark-stringify@npm:^11.0.0":
   version: 11.0.0
   resolution: "remark-stringify@npm:11.0.0"
@@ -3099,6 +3148,53 @@ __metadata:
   bin:
     resolve: bin/resolve
   checksum: 10/f345cd37f56a2c0275e3fe062517c650bb673815d885e7507566df589375d165bbbf4bdb6aa95600a9bc55f4744b81f452b5a63f95b9f10a72787dba3c90890a
+  languageName: node
+  linkType: hard
+
+"retext-latin@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "retext-latin@npm:3.1.0"
+  dependencies:
+    "@types/nlcst": "npm:^1.0.0"
+    parse-latin: "npm:^5.0.0"
+    unherit: "npm:^3.0.0"
+    unified: "npm:^10.0.0"
+  checksum: 10/1c0eb7430b143b9ac91af44ed6e349df2a691004a4056d77256fc6b2dde2b06688e5b6a3474d43eb606541e39dc84c79e1704a1c768c503671fc6cdc43fd6f95
+  languageName: node
+  linkType: hard
+
+"retext-smartypants@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "retext-smartypants@npm:5.2.0"
+  dependencies:
+    "@types/nlcst": "npm:^1.0.0"
+    nlcst-to-string: "npm:^3.0.0"
+    unified: "npm:^10.0.0"
+    unist-util-visit: "npm:^4.0.0"
+  checksum: 10/d2e2335fddf4ee700fa8416c318330977feaf4667ee08be717b34c0838378db050ea72d65e966e25f8d78156e0dc67c0f204f2b0dc9c758d720a05db46c4837e
+  languageName: node
+  linkType: hard
+
+"retext-stringify@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "retext-stringify@npm:3.1.0"
+  dependencies:
+    "@types/nlcst": "npm:^1.0.0"
+    nlcst-to-string: "npm:^3.0.0"
+    unified: "npm:^10.0.0"
+  checksum: 10/eaafe4fa77d6c25e5caff5cc3dfebaf7cf24cc736f94f099319e58d8f8cc5bb83a59410f1471ece550736bc43c137a6693ecbfc9b1afc166650a33911445639a
+  languageName: node
+  linkType: hard
+
+"retext@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "retext@npm:8.1.0"
+  dependencies:
+    "@types/nlcst": "npm:^1.0.0"
+    retext-latin: "npm:^3.0.0"
+    retext-stringify: "npm:^3.0.0"
+    unified: "npm:^10.0.0"
+  checksum: 10/feea4fa8ae257133adbecaa60f9dc0e8f0496fc90c8587e4925a5e27f91fd4366068cbde71ab2aec12191135ff98d55fa671fda75ff1a5a86deeed4d85cadf49
   languageName: node
   linkType: hard
 
@@ -3485,6 +3581,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unherit@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "unherit@npm:3.0.1"
+  checksum: 10/36e54f007b8817b5180904c704583e790530950ac57e3eae770ce56bd3c3802018ec3666fcdd38d216c03ab6e3fcc956d12e78b7abaf4355234739a4a56959cf
+  languageName: node
+  linkType: hard
+
 "unified@npm:^10.0.0":
   version: 10.1.2
   resolution: "unified@npm:10.1.2"
@@ -3558,6 +3661,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unist-util-modify-children@npm:^3.0.0":
+  version: 3.1.1
+  resolution: "unist-util-modify-children@npm:3.1.1"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+    array-iterate: "npm:^2.0.0"
+  checksum: 10/c12b4a51726b1e3443db605bbf42037718a06c9e5e3511796ee8d04a458517cf4379af4b5581b607da348027e3689f921b349bc0b6145df948b7481625454aab
+  languageName: node
+  linkType: hard
+
 "unist-util-position-from-estree@npm:^1.0.0, unist-util-position-from-estree@npm:^1.1.0":
   version: 1.1.2
   resolution: "unist-util-position-from-estree@npm:1.1.2"
@@ -3601,6 +3714,15 @@ __metadata:
   dependencies:
     "@types/unist": "npm:^3.0.0"
   checksum: 10/d15c88aca7a31902d95d5b5355bbe09583cf6f6ff6e59e134ef76c76d3c30bc1021f2d7ea5b7897c6d0858ed5f3770c1b19de9c78274f50d72f95a0d05f1af71
+  languageName: node
+  linkType: hard
+
+"unist-util-visit-children@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "unist-util-visit-children@npm:2.0.2"
+  dependencies:
+    "@types/unist": "npm:^2.0.0"
+  checksum: 10/02af16ba91b14a57f277e0b73752f4a9420821826ef1b1f0f0c6ba8215bb40ebc5d70e6790d73f828a1903a7cbe953a4c5a39c3220ff279147d59b83ef486e15
   languageName: node
   linkType: hard
 
