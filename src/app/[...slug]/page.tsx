@@ -1,4 +1,5 @@
 import { readdir } from 'node:fs/promises'
+import { DateFormatter } from '@/components/DateFormatter'
 import { getEditUrl } from '@/utils/getEditUrl'
 import { WIKI_PATH, loadPage } from '@/utils/loadPage'
 import type { Metadata } from 'next'
@@ -44,7 +45,7 @@ const WikiPage = async ({ params }: Props) => {
             Edit page
           </Link>
           <span className="text-xs text-surface-foreground/50">
-            Last edited {page.lastModified.toLocaleString('en', { day: 'numeric', month: 'long', year: 'numeric' })}
+            Last edited <DateFormatter date={page.lastModified} />
           </span>
         </div>
       </header>

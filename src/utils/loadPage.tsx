@@ -40,7 +40,7 @@ export const loadPage = cache(async (slug: string) => {
         if (!props.href) throw new Error('Link href is missing')
         const isExternal = props.href.includes('://') && !props.href?.includes('.mdx')
 
-        const isFootnote = Boolean('data-footnote-ref' in props && props['data-footnote-ref'])
+        const isFootnoteNumber = Boolean('data-footnote-ref' in props && props['data-footnote-ref'])
 
         return (
           <Link
@@ -48,9 +48,9 @@ export const loadPage = cache(async (slug: string) => {
             href={isExternal ? props.href : props.href?.replace('.mdx', '')}
             rel={isExternal ? 'nofollow noreferrer' : undefined}
             target={isExternal ? '_blank' : undefined}
-            className={isFootnote ? 'hover:underline' : 'underline'}
+            className={isFootnoteNumber ? 'hover:underline' : 'underline'}
           >
-            {isFootnote ? <>[{children}]</> : children}
+            {isFootnoteNumber ? <>[{children}]</> : children}
             {isExternal && <ExternalLinkIcon className="h-3 w-3 inline-block ml-1 align-middle" />}
           </Link>
         )

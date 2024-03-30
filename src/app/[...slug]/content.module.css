@@ -2,16 +2,28 @@
   @apply space-y-4;
 
   & h2 {
-    @apply font-heading font-bold text-2xl border-b;
+    @apply font-heading font-bold text-2xl border-b overflow-auto;
   }
   & h3 {
     @apply font-heading font-bold text-xl;
   }
 
+  & figure {
+    @apply md:float-right md:clear-right md:w-[300px] md:ml-4 md:mb-4;
+
+    & img {
+      @apply w-auto rounded;
+    }
+
+    & figcaption {
+      @apply text-xs italic text-center mt-1;
+    }
+  }
+
   & ol { @apply list-decimal; }
   & ul { @apply list-disc; }
   & ol, & ul {
-    @apply list-inside;
+    @apply ml-4;
 
     & li p {
       @apply inline;
@@ -20,7 +32,7 @@
 
   /* Info box */
   & dl {
-    @apply border md:float-right rounded p-3 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 text-xs md:w-[300px] md:ml-4 md:mb-4;
+    @apply border md:float-right md:clear-right rounded p-3 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 text-xs md:w-[300px] md:ml-4 md:mb-4 md:!mt-0;
 
     & dt {
       @apply font-bold;
@@ -30,5 +42,17 @@
   /* Footnotes */
   & section[data-footnotes=true] {
     @apply space-y-4 text-sm;
+
+    & li {
+      @apply whitespace-nowrap;
+
+      & * {
+        @apply whitespace-normal;
+      }
+    }
+
+    & a {
+      @apply break-words;
+    }
   }
 }
