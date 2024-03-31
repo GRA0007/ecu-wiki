@@ -76,7 +76,7 @@ export const loadPage = cache(async (slug: string) => {
     },
   })
 
-  const { description, image } = getPageMetadata(source)
+  const { description, image } = getPageMetadata(source.toString())
 
   return {
     title: frontmatter.title,
@@ -87,8 +87,8 @@ export const loadPage = cache(async (slug: string) => {
   }
 })
 
-const getPageMetadata = (source: Buffer) => {
-  let markdown = source.toString()
+export const getPageMetadata = (source: string) => {
+  let markdown = source
   // Remove frontmatter
   if (markdown.startsWith('---')) {
     markdown = markdown.split('---\n').slice(2).join('---\n')

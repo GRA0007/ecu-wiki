@@ -27,7 +27,7 @@ const Home = () => {
         </Link>
       </main>
 
-      <Search />
+      <Search maxResults={3} align="center" />
 
       <footer className="text-white/60 font-heading text-center">&copy; 2024 The Ewan Breakey Fan Club</footer>
     </div>

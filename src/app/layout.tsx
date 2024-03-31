@@ -1,3 +1,4 @@
+import Providers from '@/app/providers'
 import type { Metadata } from 'next'
 import { Grenze, Grenze_Gotisch, Inter } from 'next/font/google'
 import './globals.css'
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body className={`${displayFont.variable} ${headingFont.variable} ${bodyFont.variable}`}>{children}</body>
+      <body className={`${displayFont.variable} ${headingFont.variable} ${bodyFont.variable}`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
