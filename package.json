@@ -25,6 +25,8 @@
     "front-matter": "^4.0.2",
     "lucide-react": "^0.363.0",
     "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-wiki-link": "^0.1.2",
+    "micromark-extension-wiki-link": "^0.0.4",
     "minisearch": "^6.3.0",
     "next": "14.2.0-canary.48",
     "next-mdx-remote": "^4.4.1",

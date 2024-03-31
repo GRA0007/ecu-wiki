@@ -6,6 +6,8 @@ import { remarkWikiLink } from '@portaljs/remark-wiki-link'
 import { ExternalLinkIcon, LinkIcon } from 'lucide-react'
 import type { Html, Paragraph, PhrasingContent } from 'mdast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
+import * as wikiLink from 'mdast-util-wiki-link'
+import { syntax } from 'micromark-extension-wiki-link'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
 import { cache } from 'react'
@@ -112,7 +114,7 @@ export const getPageMetadata = (source: string) => {
     markdown = markdown.split('---\n').slice(2).join('---\n')
   }
 
-  const tree = fromMarkdown(markdown)
+  const tree = fromMarkdown(markdown, { extensions: [syntax()], mdastExtensions: [wikiLink.fromMarkdown()] })
 
   // Find first paragraph
   const firstRootParagraph = tree.children.find((child): child is Paragraph => child.type === 'paragraph')
@@ -129,7 +131,7 @@ export const getPageMetadata = (source: string) => {
 
 // Recursively get the plain text of all children
 const getChildTextValue = (child: PhrasingContent): string[] => {
-  if (child.type === 'text') return [child.value]
+  if (child.type === 'text' || 'permalink' in (child.data ?? {})) return [(child as { value: string }).value]
   if (child.type === 'link' || child.type === 'strong' || child.type === 'emphasis' || child.type === 'delete')
     return child.children.flatMap(getChildTextValue)
   return []

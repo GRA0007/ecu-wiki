@@ -1039,6 +1039,8 @@ __metadata:
     front-matter: "npm:^4.0.2"
     lucide-react: "npm:^0.363.0"
     mdast-util-from-markdown: "npm:^2.0.0"
+    mdast-util-wiki-link: "npm:^0.1.2"
+    micromark-extension-wiki-link: "npm:^0.0.4"
     minisearch: "npm:^6.3.0"
     next: "npm:14.2.0-canary.48"
     next-mdx-remote: "npm:^4.4.1"
@@ -2093,6 +2095,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mdast-util-wiki-link@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "mdast-util-wiki-link@npm:0.1.2"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.1"
+    mdast-util-to-markdown: "npm:^0.6.5"
+  checksum: 10/80a4dd00f412f68d26cb0b23ef6c0efdec9d2b429614dda325eebdffb5c8d91c5c93037965afc29595b02f3fb10b691bd9e65d313a82ccc828074474055610db
+  languageName: node
+  linkType: hard
+
 "merge2@npm:^1.3.0":
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
@@ -2314,6 +2326,15 @@ __metadata:
     micromark-util-combine-extensions: "npm:^1.0.0"
     micromark-util-types: "npm:^1.0.0"
   checksum: 10/3ce9990814e9b5ebfdfc5df6feca8b352bd0088f99e602e23032b0138eeddf0b57f1ad1e3ba9621c4bcd68136dd995f049c728c5a86d68b4fb03cc238bf27271
+  languageName: node
+  linkType: hard
+
+"micromark-extension-wiki-link@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "micromark-extension-wiki-link@npm:0.0.4"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.1"
+  checksum: 10/668294fb5069ba869953d05e0cc79029962ba76d068c7288207b6b0ee2273e15059c810d5b7c10f3dcef030f559610ce31aeb4cd6955a0f2f359acdcca719bde
   languageName: node
   linkType: hard
 
