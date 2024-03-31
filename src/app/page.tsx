@@ -13,14 +13,14 @@ const Home = () => {
         <img src="/logo.svg" alt="" className="w-[300px] h-[300px]" />
 
         <Link
-          href="/comics/solar-and-sundry"
+          href="/wiki/Solar_and_Sundry"
           className="flex items-center gap-4 absolute top-[20%] left-[58%] hover:underline font-heading font-bold text-2xl"
         >
           <span>Solar and Sundry</span>
         </Link>
 
         <Link
-          href="/ewan-breakey"
+          href="/wiki/Ewan_Breakey"
           className="flex items-center gap-4 absolute bottom-[20%] left-[58%] hover:underline font-heading font-bold text-2xl"
         >
           <span>Ewan Breakey</span>

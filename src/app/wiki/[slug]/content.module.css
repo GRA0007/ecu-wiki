@@ -2,7 +2,15 @@
   @apply space-y-4;
 
   & a {
-    @apply text-primary;
+    @apply text-primary underline;
+
+    &[data-footnote-ref] {
+      @apply no-underline hover:underline;
+    }
+
+    &[class~=new] {
+      @apply text-red-700 dark:text-red-400;
+    }
   }
 
   & h2 {

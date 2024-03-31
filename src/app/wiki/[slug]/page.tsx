@@ -1,27 +1,22 @@
-import { readdir } from 'node:fs/promises'
 import { DateFormatter } from '@/components/DateFormatter'
 import { getEditUrl } from '@/utils/getEditUrl'
-import { WIKI_PATH, loadPage } from '@/utils/loadPage'
+import { getAllPageSlugs, loadPage } from '@/utils/loadPage'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import styles from './content.module.css'
 
-type Props = { params: { slug: string[] } }
+type Props = { params: { slug: string } }
 
 // Statically generate the wiki pages
 export const generateStaticParams = async () => {
-  const files = await readdir(WIKI_PATH, { recursive: true }).then((paths) =>
-    paths.filter((path) => path.endsWith('.mdx')),
-  )
+  const slugs = await getAllPageSlugs()
 
-  return files.map((fileName) => ({
-    slug: fileName.replace('.mdx', '').split('/'),
-  }))
+  return slugs.map((slug) => ({ slug }))
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
-  const page = await loadPage(params.slug.join('/'))
+  const page = await loadPage(params.slug)
   if (!page) notFound()
 
   return {
@@ -34,7 +29,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 }
 
 const WikiPage = async ({ params }: Props) => {
-  const page = await loadPage(params.slug.join('/'))
+  const page = await loadPage(params.slug)
   if (!page) notFound()
 
   const editUrl = getEditUrl(params.slug)

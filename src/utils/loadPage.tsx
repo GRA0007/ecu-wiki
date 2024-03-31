@@ -1,7 +1,8 @@
-import { readFile, stat } from 'node:fs/promises'
+import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { StubNotice } from '@/components/StubNotice'
 import { getEditUrl } from '@/utils/getEditUrl'
+import { remarkWikiLink } from '@portaljs/remark-wiki-link'
 import { ExternalLinkIcon, LinkIcon } from 'lucide-react'
 import type { Html, Paragraph, PhrasingContent } from 'mdast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
@@ -15,8 +16,14 @@ import remarkSmartypants from 'remark-smartypants'
 
 export const WIKI_PATH = path.join(process.cwd(), 'src/wiki')
 
+export const getAllPageSlugs = cache(async () =>
+  readdir(WIKI_PATH).then((paths) =>
+    paths.flatMap((path) => (path.endsWith('.mdx') ? [path.replace('.mdx', '')] : [])),
+  ),
+)
+
 /**
- * Load a page contents from MDX. The slug should include forward slashes but not the file extension.
+ * Load a page contents from MDX
  */
 export const loadPage = cache(async (slug: string) => {
   const filePath = path.join(WIKI_PATH, `${slug}.mdx`)
@@ -25,13 +32,24 @@ export const loadPage = cache(async (slug: string) => {
   if (!source) return undefined
 
   const stats = await stat(filePath)
+  const permalinks = await getAllPageSlugs()
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
     source,
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [remarkGfm, remarkSmartypants],
+        remarkPlugins: [
+          remarkGfm,
+          remarkSmartypants,
+          [
+            remarkWikiLink,
+            {
+              permalinks,
+              wikiLinkResolver: (name: string) => [name.replaceAll(/\s/g, '_')],
+            },
+          ],
+        ],
         rehypePlugins: [
           rehypeSlug,
           [
@@ -51,7 +69,7 @@ export const loadPage = cache(async (slug: string) => {
       },
     },
     components: {
-      Stub: () => <StubNotice editUrl={getEditUrl(slug.split('/'))} />,
+      Stub: () => <StubNotice editUrl={getEditUrl(slug)} />,
       a: ({ children, ...props }) => {
         if (!props.href) throw new Error('Link href is missing')
         const isExternal = props.href.includes('://') && !props.href?.includes('.mdx')
@@ -65,7 +83,7 @@ export const loadPage = cache(async (slug: string) => {
             href={isExternal ? props.href : props.href?.replace('.mdx', '')}
             rel={isExternal ? 'nofollow noreferrer' : undefined}
             target={isExternal ? '_blank' : undefined}
-            className={isFootnoteNumber ? 'hover:underline' : 'underline'}
+            // className={isFootnoteNumber ? 'hover:underline' : 'underline'}
           >
             {isHeadingLink && <LinkIcon className="h-4 w-4 inline-block" />}
             {isFootnoteNumber ? <>[{children}]</> : children}

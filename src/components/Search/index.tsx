@@ -147,16 +147,13 @@ export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
 }
 
 // Define missing types
-declare global {
-  class Highlight {
-    constructor(...ranges: Range[])
-  }
-
-  namespace CSS {
-    var highlights: {
-      clear: () => void
-      set: (name: string, highlight: Highlight) => void
-    }
+declare class Highlight {
+  constructor(...ranges: Range[])
+}
+declare namespace CSS {
+  const highlights: {
+    clear: () => void
+    set: (name: string, highlight: Highlight) => void
   }
 }
 

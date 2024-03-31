@@ -9,7 +9,25 @@ Check out the comics at https://comics.ewanb.me
 
 ## Contributing
 
-All wiki content is stored in the `src/wiki` folder as [MDX files](https://mdxjs.com/). It uses file-based routing. For example, the file at `src/wiki/solar-and-sundry/objects/latch.mdx` will be accessible at `/solar-and-sundry/object/latch`. Note that links between MDX files should be relative and include the mdx extension, which will be removed on the website. All images should be stored in `public/wiki` and can be used on wiki pages with a `<figure>` element.
+All wiki content is stored in the `src/wiki` folder as [MDX files](https://mdxjs.com/).
+
+Files should be named to reflect the title, which should be specified in the file as YAML frontmatter.
+
+### Links
+
+External links can be written as regular markdown links, while internal links should use the wiki links syntax. See below for a table of examples.
+
+| Syntax | HTML |
+| ------ | ---- |
+| `[External Site](https://example.com)` | `<a href="https://example.com">External site</a>` |
+| `[[Internal Link]]` | `<a href="/wiki/Internal_Link">Internal Link</a>` |
+| `[[Internal Link\|custom text]]` | `<a href="/wiki/Internal_Link">custom text</a>` |
+| `[[Internal Link#History]]` | `<a href="/wiki/Internal_Link#History">Internal Link</a>` |
+| `[[Internal Link#History\|custom text]]` | `<a href="/wiki/Internal_Link#History">custom text</a>` |
+
+### Images
+
+All images should be stored in `public/wiki` and can be used on wiki pages with a `<figure>` element.
 
 ## Local Development
 
