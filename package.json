@@ -12,7 +12,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "biome check .",
+    "format": "biome check --apply ."
   },
   "dependencies": {
     "@biomejs/biome": "^1.6.3",

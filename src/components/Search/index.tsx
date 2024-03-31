@@ -15,6 +15,7 @@ import {
 import { useQuery } from '@tanstack/react-query'
 import { FileTextIcon, LoaderCircleIcon, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { screens } from 'tailwindcss/defaultTheme'
 
@@ -24,6 +25,7 @@ interface SearchProps {
 }
 
 export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
+  const router = useRouter()
   const isMobile = useMediaQuery(`(max-width: ${screens.md})`)
   const [isOpen, setIsOpen] = useState(false)
   const { refs, floatingStyles, context } = useFloating({
@@ -100,6 +102,14 @@ export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
           placeholder="Search"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.code === 'Enter') {
+              e.preventDefault()
+              if (results && results.length > 0) {
+                router.push(`/wiki/${results[0].id}`)
+              }
+            }
+          }}
         />
       </div>
 
@@ -113,7 +123,7 @@ export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
           {results.map((result, i) => (
             <Link
               key={result.id}
-              href={`/${result.id}`}
+              href={`/wiki/${result.id}`}
               className="flex gap-2 p-2 hover:bg-surface-foreground/10"
               ref={(node) => {
                 if (node) listRef.current[i] = node
