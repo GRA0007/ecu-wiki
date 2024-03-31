@@ -1,17 +1,17 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { StubNotice } from '@/components/StubNotice'
+import { WikiLink } from '@/components/WikiLink'
 import { getEditUrl } from '@/utils/getEditUrl'
 import { remarkWikiLink } from '@portaljs/remark-wiki-link'
-import { ExternalLinkIcon, LinkIcon } from 'lucide-react'
 import type { Html, Paragraph, PhrasingContent } from 'mdast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import * as wikiLink from 'mdast-util-wiki-link'
 import { syntax } from 'micromark-extension-wiki-link'
 import { compileMDX } from 'next-mdx-remote/rsc'
-import Link from 'next/link'
 import { cache } from 'react'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeExternalLinks from 'rehype-external-links'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
@@ -34,7 +34,7 @@ export const loadPage = cache(async (slug: string) => {
   if (!source) return undefined
 
   const stats = await stat(filePath)
-  const permalinks = await getAllPageSlugs()
+  const permalinks = await getAllPageSlugs().then((slugs) => slugs.map((slug) => `/wiki/${slug}`))
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
     source,
@@ -48,7 +48,7 @@ export const loadPage = cache(async (slug: string) => {
             remarkWikiLink,
             {
               permalinks,
-              wikiLinkResolver: (name: string) => [name.replaceAll(/\s/g, '_')],
+              wikiLinkResolver: (name: string) => [`/wiki/${name.replaceAll(/\s/g, '_')}`],
             },
           ],
         ],
@@ -62,6 +62,13 @@ export const loadPage = cache(async (slug: string) => {
               properties: { 'data-heading-link': true, ariaHidden: true, tabIndex: -1 },
             },
           ],
+          [
+            rehypeExternalLinks,
+            {
+              target: '_blank',
+              rel: 'noreferrer nofollow',
+            },
+          ],
         ],
         remarkRehypeOptions: {
           clobberPrefix: '',
@@ -72,27 +79,7 @@ export const loadPage = cache(async (slug: string) => {
     },
     components: {
       Stub: () => <StubNotice editUrl={getEditUrl(slug)} />,
-      a: ({ children, ...props }) => {
-        if (!props.href) throw new Error('Link href is missing')
-        const isExternal = props.href.includes('://') && !props.href?.includes('.mdx')
-
-        const isFootnoteNumber = 'data-footnote-ref' in props
-        const isHeadingLink = 'data-heading-link' in props
-
-        return (
-          <Link
-            {...props}
-            href={isExternal ? props.href : props.href?.replace('.mdx', '')}
-            rel={isExternal ? 'nofollow noreferrer' : undefined}
-            target={isExternal ? '_blank' : undefined}
-            // className={isFootnoteNumber ? 'hover:underline' : 'underline'}
-          >
-            {isHeadingLink && <LinkIcon className="h-4 w-4 inline-block" />}
-            {isFootnoteNumber ? <>[{children}]</> : children}
-            {isExternal && <ExternalLinkIcon className="h-3 w-3 inline-block ml-1 align-middle" />}
-          </Link>
-        )
-      },
+      a: WikiLink,
     },
   })
 

@@ -5,7 +5,7 @@
     @apply text-primary underline;
 
     &[data-footnote-ref] {
-      @apply no-underline hover:underline;
+      @apply no-underline hover:underline before:content-['['] after:content-[']'];
     }
 
     &[class~=new] {

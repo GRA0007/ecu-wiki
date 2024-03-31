@@ -10,9 +10,7 @@ export const GET = async (req: NextRequest) => {
   if (!query || query.length < 3) return new NextResponse('Query must be 3 characters or longer', { status: 400 })
   const maxResults = Number(req.nextUrl.searchParams.get('max') ?? 10)
 
-  const filePaths = await readdir(WIKI_PATH, { recursive: true }).then((paths) =>
-    paths.filter((path) => path.endsWith('.mdx')),
-  )
+  const filePaths = await readdir(WIKI_PATH).then((paths) => paths.filter((path) => path.endsWith('.mdx')))
 
   const files = await Promise.all(
     filePaths.map(async (filePath) => {
