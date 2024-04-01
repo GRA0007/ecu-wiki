@@ -1,7 +1,8 @@
-import { readFile, stat } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { DateFormatter } from '@/components/DateFormatter'
 import { PageIcon } from '@/components/PageIcon'
+import { getPageModifiedDate } from '@/utils/getPageModifiedDate'
 import { WIKI_PATH, getAllPageSlugs, getPageMetadata } from '@/utils/loadPage'
 import fm from 'front-matter'
 import { ExternalLinkIcon } from 'lucide-react'
@@ -16,8 +17,8 @@ const Home = async () => {
           const source = await readFile(path.join(WIKI_PATH, `${slug}.mdx`))
           const { attributes, body } = fm<{ title: string }>(source.toString())
           const { description, image } = getPageMetadata(body)
-          const { mtime } = await stat(path.join(WIKI_PATH, `${slug}.mdx`))
-          return { slug, title: attributes.title, description, image, lastModified: mtime }
+          const lastModified = await getPageModifiedDate(slug)
+          return { slug, title: attributes.title, description, image, lastModified }
         }),
       ),
     )

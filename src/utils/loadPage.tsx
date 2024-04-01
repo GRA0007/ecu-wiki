@@ -1,8 +1,9 @@
-import { readFile, readdir, stat } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import { StubNotice } from '@/components/StubNotice'
 import { WikiLink } from '@/components/WikiLink'
 import { getEditUrl } from '@/utils/getEditUrl'
+import { getPageModifiedDate } from '@/utils/getPageModifiedDate'
 import { remarkWikiLink } from '@portaljs/remark-wiki-link'
 import type { Html, Paragraph, PhrasingContent } from 'mdast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
@@ -34,7 +35,7 @@ export const loadPage = cache(async (slug: string) => {
   const source = await readFile(filePath).catch(() => undefined)
   if (!source) return undefined
 
-  const stats = await stat(filePath)
+  const lastModified = await getPageModifiedDate(slug)
   const permalinks = await getAllPageSlugs().then((slugs) => slugs.map((slug) => `/wiki/${slug}`))
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
@@ -93,7 +94,7 @@ export const loadPage = cache(async (slug: string) => {
     title: frontmatter.title,
     description,
     image,
-    lastModified: stats.mtime,
+    lastModified,
     content,
   }
 })

@@ -26,6 +26,7 @@
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "front-matter": "^4.0.2",
+    "isomorphic-git": "^1.25.6",
     "lucide-react": "^0.363.0",
     "mdast-util-from-markdown": "^2.0.0",
     "mdast-util-wiki-link": "^0.1.2",
