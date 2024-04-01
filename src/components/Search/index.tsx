@@ -1,37 +1,25 @@
 'use client'
 
 import type { SearchResults } from '@/app/api/search/route'
+import { PageIcon } from '@/components/PageIcon'
 import useDebouncedState from '@/utils/useDebouncedState'
 import { useMediaQuery } from '@/utils/useMediaQuery'
-import {
-  type Placement,
-  offset,
-  shift,
-  useFloating,
-  useFocus,
-  useInteractions,
-  useListNavigation,
-} from '@floating-ui/react'
+import { offset, shift, useFloating, useFocus, useInteractions, useListNavigation } from '@floating-ui/react'
 import { useQuery } from '@tanstack/react-query'
-import { FileTextIcon, LoaderCircleIcon, SearchIcon } from 'lucide-react'
+import { LoaderCircleIcon, SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { screens } from 'tailwindcss/defaultTheme'
 
-interface SearchProps {
-  maxResults?: number
-  align?: 'center' | 'side'
-}
-
-export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
+export const Search = () => {
   const router = useRouter()
   const isMobile = useMediaQuery(`(max-width: ${screens.md})`)
   const [isOpen, setIsOpen] = useState(false)
   const { refs, floatingStyles, context } = useFloating({
     open: isOpen,
     onOpenChange: setIsOpen,
-    placement: getPlacement(isMobile, align),
+    placement: isMobile ? 'bottom-start' : 'bottom-end',
     middleware: [offset(4), shift({ padding: isMobile ? 20 : 40 })],
   })
   const focus = useFocus(context)
@@ -47,9 +35,7 @@ export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
     enabled: query.trim().length >= 3,
     placeholderData: (previousData) => (query.trim().length >= 3 ? previousData : undefined),
     queryFn: () => {
-      return fetch(`/api/search?q=${encodeURIComponent(query)}&max=${maxResults}`).then(
-        (res): Promise<SearchResults> => res.json(),
-      )
+      return fetch(`/api/search?q=${encodeURIComponent(query)}`).then((res): Promise<SearchResults> => res.json())
     },
   })
 
@@ -129,13 +115,7 @@ export const Search = ({ maxResults = 10, align = 'side' }: SearchProps) => {
                 if (node) listRef.current[i] = node
               }}
             >
-              {result.image ? (
-                <img src={result.image} alt="" className="object-cover h-10 w-10 rounded flex-shrink-0" />
-              ) : (
-                <div className="h-10 w-10 bg-background rounded flex items-center justify-center text-white flex-shrink-0">
-                  <FileTextIcon className="w-4 h-4" />
-                </div>
-              )}
+              <PageIcon image={result.image} />
               <div className="flex flex-col">
                 <span className="font-heading font-bold leading-snug" data-result-title={result.id}>
                   {result.title}
@@ -165,9 +145,4 @@ declare namespace CSS {
     clear: () => void
     set: (name: string, highlight: Highlight) => void
   }
-}
-
-const getPlacement = (isMobile: boolean, align: SearchProps['align']): Placement => {
-  if (align === 'center') return 'bottom'
-  return isMobile ? 'bottom-start' : 'bottom-end'
 }

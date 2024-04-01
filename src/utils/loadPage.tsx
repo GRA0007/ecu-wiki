@@ -15,6 +15,7 @@ import rehypeExternalLinks from 'rehype-external-links'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import remarkSmartypants from 'remark-smartypants'
+import title from 'title'
 
 export const WIKI_PATH = path.join(process.cwd(), 'src/wiki')
 
@@ -48,7 +49,10 @@ export const loadPage = cache(async (slug: string) => {
             remarkWikiLink,
             {
               permalinks,
-              wikiLinkResolver: (name: string) => [`/wiki/${name.replaceAll(/\s/g, '_')}`],
+              wikiLinkResolver: (name: string) => [
+                `/wiki/${title(name).replaceAll(/\s/g, '_')}`,
+                `/wiki/${name.replaceAll(/\s/g, '_')}`,
+              ],
             },
           ],
         ],

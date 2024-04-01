@@ -1,6 +1,7 @@
+import { PageIcon } from '@/components/PageIcon'
 import * as HoverCard from '@radix-ui/react-hover-card'
 import { useQuery } from '@tanstack/react-query'
-import { FileTextIcon, LoaderCircleIcon } from 'lucide-react'
+import { LoaderCircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import type { LinkProps } from '.'
@@ -35,13 +36,7 @@ export const InternalLink = (props: LinkProps) => {
           )}
           {data && (
             <Link href={props.href} className="flex gap-2">
-              {data.image ? (
-                <img src={data.image} alt="" className="object-cover h-10 w-10 rounded flex-shrink-0" />
-              ) : (
-                <div className="h-10 w-10 bg-background rounded flex items-center justify-center text-white flex-shrink-0">
-                  <FileTextIcon className="w-4 h-4" />
-                </div>
-              )}
+              <PageIcon image={data.image} />
               <div className="flex flex-col">
                 <span className="font-heading font-bold leading-snug">{data.title}</span>
                 <span className="text-xs line-clamp-4">{data.description}</span>
